@@ -1,26 +1,65 @@
-// creating and managing a single linked listi
-
 package linkedlists
 
-type node struct {
-	next *node
-	data *data
+import "fmt"
+
+type sList struct {
+	size int
+	head *Node
 }
 
-type data struct {
-	first_name string
-	last_name  string
+type Node struct {
+	next *Node
+	name string
 }
 
-func init_list(nameList []data) []node {
+func Init() sList {
+	return sList{
+		size: 0,
+		head: nil,
+	}
+}
 
-	var llist []node
+func (s *sList) PrependSingle(name string) {
+	n := &Node{
+		next: nil,
+		name: name,
+	}
 
-	var prevName node
-	for i := 0; i < len(nameList); i++ {
-		var name = nameList[i]
+	if s.head == nil {
+		s.head = n
+	} else {
+		n.next = s.head
+		s.head = n
+	}
+	s.size++
+	return
+}
 
-		n := node{}
-		llist = append(llist)
+func (s *sList) AppendSingle(name string) {
+	n := &Node{
+		next: nil,
+		name: name,
+	}
+
+	if s.head == nil {
+		s.head = n
+	} else {
+		current := s.head
+		for current.next != nil {
+			current = current.next
+		}
+		current.next = n
+	}
+
+	s.size++
+	return
+}
+
+func (l *sList) PrintSingle() {
+	node := l.head
+	for node != nil {
+		nm := node.name
+		fmt.Println("Name: ", nm)
+		node = node.next
 	}
 }

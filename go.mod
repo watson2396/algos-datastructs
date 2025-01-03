@@ -1,3 +1,3 @@
-module algos-datastructs.watson2396.com
+module github.com/watson2396/algos-datastructs
 
 go 1.23.2
