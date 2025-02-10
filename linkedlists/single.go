@@ -55,6 +55,36 @@ func (s *sList) AppendSingle(name string) {
 	return
 }
 
+func (s *sList) RemNextSingle(prevNode *Node) {
+	// pass in the pointer of the node BEFORE the
+	// node you want to remove so you don't
+	// have to find the prev one in the method
+	// a -> b -> c
+	// pass in a to remove b
+	// a -> c
+	// if pass in NULL, remove a
+	// b -> c
+
+	if s.size == 0 {
+		return
+	}
+
+	// remove Head
+	if prevNode == nil {
+		var old_element = s.head
+		s.head = old_element.next
+	} else {
+		if prevNode.next == nil {
+			return
+		}
+		var old_element = prevNode.next
+		prevNode.next = old_element.next
+	}
+
+	s.size--
+	return
+}
+
 func (l *sList) PrintSingle() {
 	node := l.head
 	for node != nil {
