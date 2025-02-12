@@ -19,7 +19,7 @@ func Init() sList {
 	}
 }
 
-func (s *sList) PrependSingle(name string) {
+func (s *sList) SListPrepend(name string) {
 	n := &Node{
 		next: nil,
 		name: name,
@@ -35,7 +35,7 @@ func (s *sList) PrependSingle(name string) {
 	return
 }
 
-func (s *sList) AppendSingle(name string) {
+func (s *sList) SListAppend(name string) {
 	n := &Node{
 		next: nil,
 		name: name,
@@ -55,7 +55,7 @@ func (s *sList) AppendSingle(name string) {
 	return
 }
 
-func (s *sList) RemNextSingle(prevNode *Node) {
+func (s *sList) SListRemNext(prevNode *Node) {
 	// pass in the pointer of the node BEFORE the
 	// node you want to remove so you don't
 	// have to find the prev one in the method
@@ -85,7 +85,7 @@ func (s *sList) RemNextSingle(prevNode *Node) {
 	return
 }
 
-func (l *sList) PrintSingle() {
+func (l *sList) SListPrint() {
 	node := l.head
 	for node != nil {
 		nm := node.name
