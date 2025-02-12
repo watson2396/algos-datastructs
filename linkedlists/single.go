@@ -32,7 +32,6 @@ func (s *sList) SListPrepend(name string) {
 		s.head = n
 	}
 	s.size++
-	return
 }
 
 func (s *sList) SListAppend(name string) {
@@ -52,7 +51,6 @@ func (s *sList) SListAppend(name string) {
 	}
 
 	s.size++
-	return
 }
 
 func (s *sList) SListRemNext(prevNode *Node) {
@@ -82,7 +80,6 @@ func (s *sList) SListRemNext(prevNode *Node) {
 	}
 
 	s.size--
-	return
 }
 
 func (l *sList) SListPrint() {
