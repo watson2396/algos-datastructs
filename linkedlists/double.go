@@ -6,21 +6,21 @@ type DNode struct {
 	prev *DNode
 }
 
-type dList struct {
+type DList struct {
 	size int
 	head *DNode
 	tail *DNode
 }
 
-func DListInit() dList {
-	return dList{
+func DListInit() DList {
+	return DList{
 		size: 0,
 		head: nil,
 		tail: nil,
 	}
 }
 
-func (d *dList) DListPrepend(name string) {
+func (d *DList) DListPrepend(name string) {
 	n := &DNode{
 		name: name,
 		next: nil,
@@ -37,7 +37,7 @@ func (d *dList) DListPrepend(name string) {
 	}
 }
 
-func (d *dList) DListInsNext(name string, element *DNode) {
+func (d *DList) DListInsNext(name string, element *DNode) {
 	n := &DNode{
 		name: name,
 		next: nil,
@@ -63,7 +63,7 @@ func (d *dList) DListInsNext(name string, element *DNode) {
 	d.size++
 }
 
-func (d *dList) DListInsPrev(name string, element *DNode) {
+func (d *DList) DListInsPrev(name string, element *DNode) {
 	n := &DNode{
 		name: name,
 		next: nil,
@@ -87,7 +87,7 @@ func (d *dList) DListInsPrev(name string, element *DNode) {
 	d.size++
 }
 
-func (d *dList) DListRemove(element *DNode) {
+func (d *DList) DListRemove(element *DNode) {
 	if d.size == 0 {
 		return
 	}
