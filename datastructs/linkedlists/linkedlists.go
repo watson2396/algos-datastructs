@@ -3,198 +3,201 @@ package linkedlists
 import "fmt"
 
 type SList struct {
-	size int
-	head *Node
+	Size int
+	Head *Node
 }
 
 type Node struct {
-	next *Node
-	name string
+	Next *Node
+	Name string
 }
 
 func SListInit() SList {
 	return SList{
-		size: 0,
-		head: nil,
+		Size: 0,
+		Head: nil,
 	}
 }
 
-func (s *SList) SListPrepend(name string) {
+func (s *SList) SListPrepend(Name string) {
 	n := &Node{
-		next: nil,
-		name: name,
+		Next: nil,
+		Name: Name,
 	}
 
-	if s.head == nil {
-		s.head = n
+	if s.Head == nil {
+		s.Head = n
 	} else {
-		n.next = s.head
-		s.head = n
+		n.Next = s.Head
+		s.Head = n
 	}
-	s.size++
+	s.Size++
 }
 
-func (s *SList) SListAppend(name string) {
+func (s *SList) SListAppend(Name string) {
 	n := &Node{
-		next: nil,
-		name: name,
+		Next: nil,
+		Name: Name,
 	}
 
-	if s.head == nil {
-		s.head = n
+	if s.Head == nil {
+		s.Head = n
 	} else {
-		current := s.head
-		for current.next != nil {
-			current = current.next
+		current := s.Head
+		for current.Next != nil {
+			current = current.Next
 		}
-		current.next = n
+		current.Next = n
 	}
 
-	s.size++
+	s.Size++
 }
 
-func (s *SList) SListRemNext(prevNode *Node) {
+func (s *SList) SListRemNext(PrevNode *Node) string {
 	// pass in the pointer of the node BEFORE the
 	// node you want to remove so you don't
-	// have to find the prev one in the method
+	// have to find the Prev one in the method
 	// a -> b -> c
 	// pass in a to remove b
 	// a -> c
 	// if pass in NULL, remove a
 	// b -> c
 
-	if s.size == 0 {
-		return
+	if s.Size == 0 {
+		return ""
 	}
 
 	// remove Head
-	if prevNode == nil {
-		var old_element = s.head
-		s.head = old_element.next
+	if PrevNode == nil {
+		var old_element = s.Head
+		s.Head = old_element.Next
+		s.Size--
+		return old_element.Name
 	} else {
-		if prevNode.next == nil {
-			return
+		if PrevNode.Next == nil {
+			return ""
 		}
-		var old_element = prevNode.next
-		prevNode.next = old_element.next
+		var old_element = PrevNode.Next
+		PrevNode.Next = old_element.Next
+		s.Size--
+		return old_element.Name
 	}
 
-	s.size--
 }
 
 func (l *SList) SListPrint() {
-	node := l.head
+	node := l.Head
 	for node != nil {
-		nm := node.name
+		nm := node.Name
 		fmt.Println("Name: ", nm)
-		node = node.next
+		node = node.Next
 	}
 }
 
 type DNode struct {
-	name string
-	next *DNode
-	prev *DNode
+	Name string
+	Next *DNode
+	Prev *DNode
 }
 
 type DList struct {
-	size int
-	head *DNode
+	Size int
+	Head *DNode
 	tail *DNode
 }
 
 func DListInit() DList {
 	return DList{
-		size: 0,
-		head: nil,
+		Size: 0,
+		Head: nil,
 		tail: nil,
 	}
 }
 
-func (d *DList) DListPrepend(name string) {
+func (d *DList) DListPrepend(Name string) {
 	n := &DNode{
-		name: name,
-		next: nil,
-		prev: nil,
+		Name: Name,
+		Next: nil,
+		Prev: nil,
 	}
 
-	if d.head == nil {
-		d.head = n
+	if d.Head == nil {
+		d.Head = n
 		d.tail = n
 	} else {
-		n.next = d.head
-		d.head.prev = n
-		d.head = n
+		n.Next = d.Head
+		d.Head.Prev = n
+		d.Head = n
 	}
 }
 
-func (d *DList) DListInsNext(name string, element *DNode) {
+func (d *DList) DListInsNext(Name string, element *DNode) {
 	n := &DNode{
-		name: name,
-		next: nil,
-		prev: nil,
+		Name: Name,
+		Next: nil,
+		Prev: nil,
 	}
 
-	if d.size == 0 {
-		d.head = n
+	if d.Size == 0 {
+		d.Head = n
 		d.tail = n
 	} else {
-		n.next = element.next
-		n.prev = element
+		n.Next = element.Next
+		n.Prev = element
 
-		if element.next == nil {
+		if element.Next == nil {
 			d.tail = n
 		} else {
-			element.next.prev = n
+			element.Next.Prev = n
 		}
 
-		element.next = n
+		element.Next = n
 	}
 
-	d.size++
+	d.Size++
 }
 
-func (d *DList) DListInsPrev(name string, element *DNode) {
+func (d *DList) DListInsPrev(Name string, element *DNode) {
 	n := &DNode{
-		name: name,
-		next: nil,
-		prev: nil,
+		Name: Name,
+		Next: nil,
+		Prev: nil,
 	}
 
-	if d.size == 0 {
-		d.head = n
+	if d.Size == 0 {
+		d.Head = n
 		d.tail = n
 	} else {
-		n.next = element
-		n.prev = element.prev
+		n.Next = element
+		n.Prev = element.Prev
 
-		if element.prev == nil {
-			d.head = n
+		if element.Prev == nil {
+			d.Head = n
 		} else {
-			element.prev.next = n
+			element.Prev.Next = n
 		}
 	}
 
-	d.size++
+	d.Size++
 }
 
 func (d *DList) DListRemove(element *DNode) {
-	if d.size == 0 {
+	if d.Size == 0 {
 		return
 	}
 
-	if d.head == element {
-		d.head = element.next
-		element.next.prev = nil
+	if d.Head == element {
+		d.Head = element.Next
+		element.Next.Prev = nil
 	} else {
-		element.prev.next = element.next
+		element.Prev.Next = element.Next
 
-		if element.next == nil {
-			d.tail = element.prev
+		if element.Next == nil {
+			d.tail = element.Prev
 		} else {
-			element.next.prev = element.prev
+			element.Next.Prev = element.Prev
 		}
 	}
 
-	d.size--
+	d.Size--
 }
