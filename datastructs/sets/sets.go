@@ -4,10 +4,15 @@ import (
 	"github.com/watson2396/algos-datastructs/datastructs/linkedlists"
 )
 
-type Set struct{ linkedlists.DList }
+type Set struct{ linkedlists.List }
 
-func SetInit() {
-
+func SetInit() Set {
+	return Set{
+		linkedlists.List{
+			Size: 0,
+			Head: nil,
+		},
+	}
 }
 
 // Set insert
@@ -21,6 +26,10 @@ func SetInit() {
 // Set difference
 
 // Set is member
+
+func (s *Set) SetIsMember() {
+
+}
 
 // Set is subset
 
