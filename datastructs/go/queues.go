@@ -11,7 +11,7 @@ func (q *Queue) QueueEnqueue(name string) {
 
 // Dequeue
 func (q *Queue) QueueDequeue() string {
-	return q.SistRemNext(nil)
+	return q.ListRemNext(nil)
 }
 
 // Peek
