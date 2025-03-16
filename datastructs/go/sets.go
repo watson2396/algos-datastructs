@@ -1,14 +1,10 @@
-package sets
+package datastructs
 
-import (
-	"github.com/watson2396/algos-datastructs/datastructs/linkedlists"
-)
-
-type Set struct{ linkedlists.List }
+type Set struct{ List }
 
 func SetInit() Set {
 	return Set{
-		linkedlists.List{
+		List{
 			Size: 0,
 			Head: nil,
 		},
@@ -17,7 +13,7 @@ func SetInit() Set {
 
 // Set insert
 func (s *Set) SetInsert(name string) bool {
-	n := &linkedlists.Node{
+	n := &Node{
 		Name: name,
 		Next: nil,
 	}
@@ -32,9 +28,9 @@ func (s *Set) SetInsert(name string) bool {
 }
 
 // Set remove
-func (s *Set) SetRemove(n *linkedlists.Node) {
-	member := &linkedlists.Node{}
-	prev := &linkedlists.Node{}
+func (s *Set) SetRemove(n *Node) {
+	member := &Node{}
+	prev := &Node{}
 
 	for member = s.Head; member == nil; member = s.ListNext(*member) {
 		if member.Name == n.Name {
@@ -58,8 +54,8 @@ func (s *Set) SetRemove(n *linkedlists.Node) {
 
 // Set is member
 
-func (s *Set) SetIsMember(n *linkedlists.Node) bool {
-	member := &linkedlists.Node{}
+func (s *Set) SetIsMember(n *Node) bool {
+	member := &Node{}
 
 	for member = s.Head; member == nil; member = s.ListNext(*member) {
 		if member.Name == n.Name {

@@ -1,4 +1,4 @@
-package linkedlists
+package datastructs
 
 type DNode struct {
 	Name string

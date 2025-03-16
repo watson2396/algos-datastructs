@@ -1,22 +1,18 @@
-package stacks
+package datastructs
 
 // last-in, first-out, LIFO
 
-import (
-	"github.com/watson2396/algos-datastructs/datastructs/linkedlists"
-)
-
 // Struct composition
-type Stack struct{ linkedlists.SList }
+type Stack struct{ List }
 
 // Pop
 func (s *Stack) StackPop(name string) {
-	s.SList.SListRemNext(nil)
+	s.List.ListRemNext(nil)
 }
 
 // Push
 func (s *Stack) StackPush(name string) {
-	s.SListPrepend(name)
+	s.ListPrepend(name)
 }
 
 // Peek
