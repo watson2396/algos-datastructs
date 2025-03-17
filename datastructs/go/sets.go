@@ -47,13 +47,74 @@ func (s *Set) SetRemove(n *Node) {
 }
 
 // Set union
+func SetUnion(s1 *Set, s2 *Set) Set {
+
+	sn := Set{
+		List{
+			Size: 0,
+			Head: nil,
+		},
+	}
+
+	member := &Node{}
+
+	for member = s1.Head; member == nil; member = s1.ListNext(*member) {
+		sn.ListInsNext(member, member.Name)
+	}
+
+	for member = s2.Head; member == nil; member = s2.ListNext(*member) {
+		if sn.SetIsMember(member) {
+			continue
+		} else {
+			sn.ListInsNext(member, member.Name)
+		}
+
+	}
+
+	return sn
+}
 
 // Set intersection
+func SetIntersection(s1 *Set, s2 *Set) Set {
+	sn := Set{
+		List{
+			Size: 0,
+			Head: nil,
+		},
+	}
+
+	member := &Node{}
+
+	for member = s1.Head; member == nil; member = s1.ListNext(*member) {
+		if s2.SetIsMember(member) {
+			sn.ListInsNext(member, member.Name)
+		}
+	}
+
+	return sn
+}
 
 // Set difference
+func SetDifference(s1 *Set, s2 *Set) Set {
+	sn := Set{
+		List{
+			Size: 0,
+			Head: nil,
+		},
+	}
+
+	member := &Node{}
+
+	for member = s1.Head; member == nil; member = s1.ListNext(*member) {
+		if !s2.SetIsMember(member) {
+			sn.ListInsNext(member, member.Name)
+		}
+	}
+
+	return sn
+}
 
 // Set is member
-
 func (s *Set) SetIsMember(n *Node) bool {
 	member := &Node{}
 

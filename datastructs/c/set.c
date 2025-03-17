@@ -58,31 +58,18 @@ int set_remove(Set *set, void **data) {
   return list_rem_next(set, prev, data);
 }
 
-/*****************************************************************************
- *                                                                            *
- *  ------------------------------- set_union ------------------------------  *
- *                                                                            *
- *****************************************************************************/
-
+ // ------------------------------- set_union ------------------------------
 int set_union(Set *setu, const Set *set1, const Set *set2) {
 
   ListElmt *member;
 
   void *data;
 
-  /*****************************************************************************
-   *                                                                            *
-   *  Initialize the set for the union. *
-   *                                                                            *
-   *****************************************************************************/
+    // Initialize the set for the union
 
   set_init(setu, set1->match, NULL);
 
-  /*****************************************************************************
-   *                                                                            *
-   *  Insert the members of the first set. *
-   *                                                                            *
-   *****************************************************************************/
+   // Insert the members of the first set
 
   for (member = list_head(set1); member != NULL; member = list_next(member)) {
 
@@ -95,21 +82,13 @@ int set_union(Set *setu, const Set *set1, const Set *set2) {
     }
   }
 
-  /*****************************************************************************
-   *                                                                            *
-   *  Insert the members of the second set. *
-   *                                                                            *
-   *****************************************************************************/
+   // Insert the members of the second set
 
   for (member = list_head(set2); member != NULL; member = list_next(member)) {
 
     if (set_is_member(set1, list_data(member))) {
 
-      /***********************************************************************
-       *                                                                      *
-       *  Do not allow the insertion of duplicates.                           *
-       *                                                                      *
-       ***********************************************************************/
+       //  Do not allow the insertion of duplicates
 
       continue;
 
@@ -130,31 +109,19 @@ int set_union(Set *setu, const Set *set1, const Set *set2) {
   return 0;
 }
 
-/*****************************************************************************
- *                                                                            *
- *  --------------------------- set_intersection ---------------------------  *
- *                                                                            *
- *****************************************************************************/
-
-int set_intersection(Set *seti, const Set *set1, const Set *set2) {
+ //  --------------------------- set_intersection ---------------------------
+int set_intersection(Set *seti, const Set *set1, const Set *set2) 
+{
 
   ListElmt *member;
 
   void *data;
 
-  /*****************************************************************************
-   *                                                                            *
-   *  Initialize the set for the intersection. *
-   *                                                                            *
-   *****************************************************************************/
+   //  Initialize the set for the intersection
 
   set_init(seti, set1->match, NULL);
 
-  /*****************************************************************************
-   *                                                                            *
-   *  Insert the members present in both sets. *
-   *                                                                            *
-   *****************************************************************************/
+   //  Insert the members present in both sets
 
   for (member = list_head(set1); member != NULL; member = list_next(member)) {
 
@@ -173,32 +140,17 @@ int set_intersection(Set *seti, const Set *set1, const Set *set2) {
   return 0;
 }
 
-/*****************************************************************************
- *                                                                            *
- *  ---------------------------- set_difference ----------------------------  *
- *                                                                            *
- *****************************************************************************/
-
+ //  ---------------------------- set_difference ----------------------------
 int set_difference(Set *setd, const Set *set1, const Set *set2) {
 
   ListElmt *member;
 
   void *data;
 
-  /*****************************************************************************
-   *                                                                            *
-   *  Initialize the set for the difference. *
-   *                                                                            *
-   *****************************************************************************/
-
+   //  Initialize the set for the difference
   set_init(setd, set1->match, NULL);
 
-  /*****************************************************************************
-   *                                                                            *
-   *  Insert the members from set1 not in set2. *
-   *                                                                            *
-   *****************************************************************************/
-
+   //  Insert the members from set1 not in set2
   for (member = list_head(set1); member != NULL; member = list_next(member)) {
 
     if (!set_is_member(set2, list_data(member))) {
