@@ -129,4 +129,29 @@ func (s *Set) SetIsMember(n *Node) bool {
 
 // Set is subset
 
+func (s *Set) SetIsSubset(s2 *Set) bool {
+
+	member := &Node{}
+
+	if s.Size > s2.Size {
+		return false
+	}
+
+	for member = s.Head; member == nil; member = s.ListNext(*member) {
+		if !s.SetIsMember(member) {
+			return false
+		}
+	}
+
+	return true
+}
+
 // Set is equal
+func (s *Set) SetIsEqual(s2 *Set) bool {
+
+	if s.Size != s2.Size {
+		return false
+	}
+
+	return s.SetIsSubset(s2)
+}

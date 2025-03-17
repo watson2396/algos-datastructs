@@ -10,7 +10,6 @@
 #include "list.h"
 #include "set.h"
 
-//  ------------------------------- set_init -------------------------------
 void set_init(Set *set, int (*match)(const void *key1, const void *key2),
               void (*destroy)(void *data)) {
 
@@ -22,7 +21,6 @@ void set_init(Set *set, int (*match)(const void *key1, const void *key2),
   return;
 }
 
-// ------------------------------ set_insert ------------------------------
 int set_insert(Set *set, const void *data) {
 
   // Do not allow the insertion of duplicates
@@ -34,7 +32,6 @@ int set_insert(Set *set, const void *data) {
   return list_ins_next(set, list_tail(set), data);
 }
 
-// ------------------------------ set_remove ------------------------------
 int set_remove(Set *set, void **data) {
 
   ListElmt *member, *prev;
@@ -58,7 +55,6 @@ int set_remove(Set *set, void **data) {
   return list_rem_next(set, prev, data);
 }
 
- // ------------------------------- set_union ------------------------------
 int set_union(Set *setu, const Set *set1, const Set *set2) {
 
   ListElmt *member;
@@ -109,7 +105,6 @@ int set_union(Set *setu, const Set *set1, const Set *set2) {
   return 0;
 }
 
- //  --------------------------- set_intersection ---------------------------
 int set_intersection(Set *seti, const Set *set1, const Set *set2) 
 {
 
@@ -140,7 +135,6 @@ int set_intersection(Set *seti, const Set *set1, const Set *set2)
   return 0;
 }
 
- //  ---------------------------- set_difference ----------------------------
 int set_difference(Set *setd, const Set *set1, const Set *set2) {
 
   ListElmt *member;
@@ -168,21 +162,12 @@ int set_difference(Set *setd, const Set *set1, const Set *set2) {
   return 0;
 }
 
-/*****************************************************************************
- *                                                                            *
- *  ----------------------------- set_is_member ----------------------------  *
- *                                                                            *
- *****************************************************************************/
 
 int set_is_member(const Set *set, const void *data) {
 
   ListElmt *member;
 
-  /*****************************************************************************
-   *                                                                            *
-   *  Determine if the data is a member of the set. *
-   *                                                                            *
-   *****************************************************************************/
+   //  Determine if the data is a member of the set
 
   for (member = list_head(set); member != NULL; member = list_next(member)) {
 
@@ -193,30 +178,16 @@ int set_is_member(const Set *set, const void *data) {
   return 0;
 }
 
-/*****************************************************************************
- *                                                                            *
- *  ----------------------------- set_is_subset ----------------------------  *
- *                                                                            *
- *****************************************************************************/
-
 int set_is_subset(const Set *set1, const Set *set2) {
 
   ListElmt *member;
 
-  /*****************************************************************************
-   *                                                                            *
-   *  Do a quick test to rule out some cases. *
-   *                                                                            *
-   *****************************************************************************/
+   // Do a quick test to rule out some cases
 
   if (set_size(set1) > set_size(set2))
     return 0;
 
-  /*****************************************************************************
-   *                                                                            *
-   *  Determine if set1 is a subset of set2. *
-   *                                                                            *
-   *****************************************************************************/
+   //  Determine if set1 is a subset of set2
 
   for (member = list_head(set1); member != NULL; member = list_next(member)) {
 
@@ -227,28 +198,14 @@ int set_is_subset(const Set *set1, const Set *set2) {
   return 1;
 }
 
-/*****************************************************************************
- *                                                                            *
- *  ------------------------------ set_is_equal ----------------------------  *
- *                                                                            *
- *****************************************************************************/
-
 int set_is_equal(const Set *set1, const Set *set2) {
 
-  /*****************************************************************************
-   *                                                                            *
-   *  Do a quick test to rule out some cases. *
-   *                                                                            *
-   *****************************************************************************/
+   //  Do a quick test to rule out some cases
 
   if (set_size(set1) != set_size(set2))
     return 0;
 
-  /*****************************************************************************
-   *                                                                            *
-   *  Sets of the same size are equal if they are subsets. *
-   *                                                                            *
-   *****************************************************************************/
+   // Sets of the same size are equal if they are subsets
 
   return set_is_subset(set1, set2);
 }
