@@ -114,11 +114,8 @@ func (s *List) ListRemNext(PrevNode *Node) string {
 }
 
 func (l *List) ListPrint() {
-	node := l.Head
-	for node != nil {
-		nm := node.Name
-		fmt.Println("Name: ", nm)
-		node = node.Next
+	for node := l.Head; node != nil; node = node.Next {
+		fmt.Println("Name:", node.Name)
 	}
 }
 

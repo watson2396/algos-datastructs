@@ -11,6 +11,10 @@ func SetInit() Set {
 	}
 }
 
+func (s *Set) SetPrint() {
+	s.ListPrint()
+}
+
 // Set insert
 func (s *Set) SetInsert(name string) bool {
 	n := &Node{
@@ -32,7 +36,7 @@ func (s *Set) SetRemove(n *Node) {
 	member := &Node{}
 	prev := &Node{}
 
-	for member = s.Head; member == nil; member = s.ListNext(*member) {
+	for member = s.Head; member != nil; member = s.ListNext(*member) {
 		if member.Name == n.Name {
 			break
 		}
@@ -47,7 +51,7 @@ func (s *Set) SetRemove(n *Node) {
 }
 
 // Set union
-func SetUnion(s1 *Set, s2 *Set) Set {
+func (s *Set) SetUnion(s2 *Set) Set {
 
 	sn := Set{
 		List{
@@ -56,13 +60,11 @@ func SetUnion(s1 *Set, s2 *Set) Set {
 		},
 	}
 
-	member := &Node{}
-
-	for member = s1.Head; member == nil; member = s1.ListNext(*member) {
+	for member := s.Head; member != nil; member = s.ListNext(*member) {
 		sn.ListInsNext(member, member.Name)
 	}
 
-	for member = s2.Head; member == nil; member = s2.ListNext(*member) {
+	for member := s2.Head; member != nil; member = s2.ListNext(*member) {
 		if sn.SetIsMember(member) {
 			continue
 		} else {
@@ -75,7 +77,7 @@ func SetUnion(s1 *Set, s2 *Set) Set {
 }
 
 // Set intersection
-func SetIntersection(s1 *Set, s2 *Set) Set {
+func (s *Set) SetIntersection(s2 *Set) Set {
 	sn := Set{
 		List{
 			Size: 0,
@@ -83,10 +85,8 @@ func SetIntersection(s1 *Set, s2 *Set) Set {
 		},
 	}
 
-	member := &Node{}
-
-	for member = s1.Head; member == nil; member = s1.ListNext(*member) {
-		if s2.SetIsMember(member) {
+	for member := s2.Head; member != nil; member = s2.ListNext(*member) {
+		if s.SetIsMember(member) {
 			sn.ListInsNext(member, member.Name)
 		}
 	}
@@ -95,7 +95,7 @@ func SetIntersection(s1 *Set, s2 *Set) Set {
 }
 
 // Set difference
-func SetDifference(s1 *Set, s2 *Set) Set {
+func (s *Set) SetDifference(s2 *Set) Set {
 	sn := Set{
 		List{
 			Size: 0,
@@ -103,10 +103,8 @@ func SetDifference(s1 *Set, s2 *Set) Set {
 		},
 	}
 
-	member := &Node{}
-
-	for member = s1.Head; member == nil; member = s1.ListNext(*member) {
-		if !s2.SetIsMember(member) {
+	for member := s2.Head; member != nil; member = s2.ListNext(*member) {
+		if !s.SetIsMember(member) {
 			sn.ListInsNext(member, member.Name)
 		}
 	}
@@ -116,9 +114,7 @@ func SetDifference(s1 *Set, s2 *Set) Set {
 
 // Set is member
 func (s *Set) SetIsMember(n *Node) bool {
-	member := &Node{}
-
-	for member = s.Head; member == nil; member = s.ListNext(*member) {
+	for member := s.Head; member != nil; member = s.ListNext(*member) {
 		if member.Name == n.Name {
 			return true
 		}
@@ -130,14 +126,11 @@ func (s *Set) SetIsMember(n *Node) bool {
 // Set is subset
 
 func (s *Set) SetIsSubset(s2 *Set) bool {
-
-	member := &Node{}
-
-	if s.Size > s2.Size {
+	if s.Size < s2.Size {
 		return false
 	}
 
-	for member = s.Head; member == nil; member = s.ListNext(*member) {
+	for member := s2.Head; member != nil; member = s2.ListNext(*member) {
 		if !s.SetIsMember(member) {
 			return false
 		}

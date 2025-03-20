@@ -3,7 +3,6 @@ package main
 import (
 	"errors"
 	"fmt"
-	"math/rand"
 
 	datastructs "github.com/watson2396/algos-datastructs/datastructs/go"
 )
@@ -24,29 +23,20 @@ func generateSet(size int, stringSize int) (datastructs.Set, error) {
 	return s, nil
 }
 
-func randomString(n int) string {
-	var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
-
-	b := make([]rune, n)
-
-	for i := 0; i <= n; i++ {
-		b[i] = letters[rand.Intn(len(letters))]
-	}
-
-	return string(b)
-}
-
 func TestSetIsEqual() {
-
 	s1, err := generateSet(5, 5)
 	if err != nil {
-		fmt.Println("Cooked")
+		fmt.Printf("Cooked: %s", err)
 	}
 
 	s2, err := generateSet(5, 5)
 	if err != nil {
-		fmt.Println("Cooked")
+		fmt.Printf("Cooked: %s", err)
 	}
 
-	s1.SetIsEqual(&s2)
+	if s1.SetIsEqual(&s2) {
+		fmt.Println("Sets equal")
+	} else {
+		fmt.Println("Sets are not equal")
+	}
 }
