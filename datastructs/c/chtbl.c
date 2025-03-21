@@ -4,8 +4,13 @@
 #include "list.h"
 #include "chtbl.h"
 
-int chtbl_init(CHTbl* htbl, int buckets, int (*h)(const void* key), int
-(*match)(const void* key1, const void* key2), void (*destroy)(void* data))
+int chtbl_init(
+    CHTbl* htbl,
+    int buckets,
+    int (*h)(const void* key),
+    int (*match)(const void* key1, const void* key2),
+    void (*destroy)(void* data)
+)
 {
 
     int                i;
@@ -60,12 +65,10 @@ int chtbl_insert(CHTbl* htbl, const void* data)
 
     void* temp;
 
-    int                bucket,
-        retval;
+    int bucket, retval;
 
     //  Do nothing if the data is already in the table
     temp = (void*)data;
-
     if (chtbl_lookup(htbl, &temp) == 0)
         return 1;
 

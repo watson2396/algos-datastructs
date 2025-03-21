@@ -18,7 +18,6 @@ unsigned int hashpjw(const void* key)
 
     while (*ptr != '\0')
     {
-
         unsigned int tmp;
 
         val = (val << 4) + (*ptr);
@@ -32,11 +31,9 @@ unsigned int hashpjw(const void* key)
         }
 
         ptr++;
-
     }
 
     //  In practice, replace PRIME_TBLSIZ with the actual table size
-
     return val % PRIME_TBLSIZ;
 
 }
