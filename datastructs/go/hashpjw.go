@@ -1,25 +1,27 @@
 package datastructs
 
-func hashpjw_string(data string) int {
+import "strconv"
 
-	var key string
-	var val, PRIME_TBLSIZE int
-
-	// TODO
-	// 3 is certainly not right
-	// find a better number
-	PRIME_TBLSIZE = 3
-
-	//  Hash the key by performing a number of bit operations on it
-	val = 0
-	key = data
-
-	for pos, char := range key {
-		var tmp int
-
-		val = (val << 4) + (key)
+// based on the C hashpjw, modified to work in Go
+func HashString(str string, tblSize int) int {
+	val := 0
+	key, err := strconv.Atoi(str)
+	if err != nil {
+		panic(err)
 	}
 
-	return val % PRIME_TBLSIZE
+	for i := 0; i < key; i++ {
+		tmp := 0
 
+		val = (val << 4) + key
+
+		tmp = (val & 0xf000000)
+
+		if tmp > 1 {
+			val = val ^ (tmp >> 24)
+			val = val ^ tmp
+		}
+	}
+
+	return val % tblSize
 }

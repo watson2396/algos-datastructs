@@ -29,6 +29,9 @@ func ChHtblInit(buckets int) (ChHtbl, error) {
 }
 
 // Chained Hashtable Hash
+func (h *ChHtbl) hash(str string) int {
+	return HashString(str, h.buckets)
+}
 
 // Chained Hashtable Match
 
