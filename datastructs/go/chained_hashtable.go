@@ -34,9 +34,29 @@ func (h *ChHtbl) hash(str string) int {
 }
 
 // Chained Hashtable Match
+func (h *ChHtbl) Match(str string, n Node) bool {
+	if str == n.Name {
+		return true
+	} else {
+		return false
+	}
+}
 
 // Chained Hashtable Insert
 
 // Chained Hashtable Remove
 
 // Chained Hashtable Lookup
+func (h *ChHtbl) Lookup(str string) (string, error) {
+
+	bucket := h.hash(str)
+	list := h.table[bucket]
+
+	for element := list.ListHead(); element != nil; element = list.ListNext(*element) {
+		if h.Match(str, *element) {
+			return str, nil
+		}
+	}
+
+	return "", nil
+}

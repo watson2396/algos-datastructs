@@ -21,6 +21,10 @@ func ListInit() List {
 	}
 }
 
+func (s *List) ListHead() *Node {
+	return s.Head
+}
+
 func (s *List) ListPrepend(Name string) {
 	n := &Node{
 		Next: nil,
